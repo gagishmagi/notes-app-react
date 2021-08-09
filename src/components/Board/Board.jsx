@@ -1,6 +1,8 @@
 import React from 'react'
-import Note from './Note'
-import NotesForm from './NotesForm'
+import Note from '../Note/Note'
+import NotesForm from '../NotesForm/NotesForm'
+
+import boardImg from '../../images/background.jpg'
 
 class Board extends React.Component{
     constructor(props){
@@ -79,10 +81,10 @@ class Board extends React.Component{
     render(){
         console.log(this.state.notes)
         return (
-            <div>
+            <div style={myStyles}>
                 
                 <NotesForm handleUpdateState={this.handleUpdateState} addNote={this.addNote} />
-                <div className="notes">
+                <div style={myStyles.flexStuff} className="notes">
                     {this.state.notes.map((note, index)=>{
                        return  <Note key={index} note={note} removeNote={this.removeNote} />
                     })}
@@ -92,6 +94,17 @@ class Board extends React.Component{
             </div>
             
         )
+    }
+}
+
+let myStyles = {
+    width: "100%",
+    minHeight: "1000px",
+    backgroundImage: `url(${boardImg})`,
+    flexStuff :{
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap"
     }
 }
 

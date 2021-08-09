@@ -9,7 +9,7 @@ class Board extends React.Component{
         super(props)
 
         this.state = {
-            notes: [],
+            notes: JSON.parse(localStorage.getItem("notes")) || [],
             note: {
                 text: "",
                 date: "",
@@ -55,6 +55,7 @@ class Board extends React.Component{
         myNotes.push(note)
         // console.log(myNotes)
 
+        localStorage.setItem("notes", JSON.stringify(myNotes))
 
         this.setState({notes: myNotes})
     }
@@ -73,6 +74,8 @@ class Board extends React.Component{
     removeNote = (noteId) => {
         let newNotes = [...this.state.notes]
         newNotes = newNotes.filter((note) => note.noteId !== noteId)
+
+        localStorage.setItem("notes", JSON.stringify(newNotes))
 
         this.setState({notes: newNotes})
     }
